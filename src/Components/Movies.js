@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import Movie from "./Movie";
 import firebaseDb from "../firebase";
 
-import firebase from "../firebase";
-
 const useStyles = makeStyles({
   root: {
     textAlign: "center",
@@ -13,16 +11,38 @@ const useStyles = makeStyles({
     marginTop: 30,
   },
   card: {
-    padding: 20,
+    padding: 30,
   },
 });
 
+const getMovies = async () => {
+  const snapshot = await firebaseDb.collection("movies").get();
+  let returnArr = [];
+  await snapshot.forEach((doc) => {
+    returnArr.push(doc);
+  });
+  returnArr = returnArr.map((movie) => {
+    const obj = { ...movie.data(), id: movie.id };
+    return obj;
+  });
+  return await returnArr;
+};
+
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    console.log(firebase);
-    setMovies([]);
+
+  useEffect(async () => {
+    const newMovies = await getMovies();
+    console.log(newMovies);
+    setMovies(newMovies);
   }, []);
+
+  const deleteMovie = (id) => {
+    // console.log("Delete", id);
+    firebaseDb.collection("movies").doc(id).delete();
+    const newMovies = movies.filter((movie) => movie.id !== id);
+    setMovies(newMovies);
+  };
 
   const classes = useStyles();
 
@@ -42,7 +62,7 @@ const Movies = () => {
               lg={4}
               className={classes.card}
             >
-              <Movie movie={movie} />
+              <Movie movie={movie} deleteMovie={deleteMovie} />
             </Grid>
           );
         })}

@@ -19,8 +19,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Movie({ movie }) {
+export default function Movie({ movie, deleteMovie }) {
   const classes = useStyles();
+  console.log(movie);
   return (
     <Card className={classes.root} elevation={3}>
       <CardActionArea>
@@ -34,7 +35,11 @@ export default function Movie({ movie }) {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.centerAlign}>
-        <Button size="small" color="secondary">
+        <Button
+          size="small"
+          color="secondary"
+          onClick={() => deleteMovie(movie.id)}
+        >
           Delete
         </Button>
         <Button size="small" color="primary">
