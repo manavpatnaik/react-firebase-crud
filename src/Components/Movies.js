@@ -30,9 +30,17 @@ const Movies = () => {
         year: 2012,
         about: "kdfvbkjndfvkjfdnkjnfdjkn",
       },
+      {
+        id: 3,
+        name: "Interstellar 3",
+        year: 2012,
+        about: "kdfvbkjndfvkjfdnkjnfdjkn",
+      },
     ]);
   }, []);
+
   const classes = useStyles();
+  
   return (
     <Container className={classes.root}>
       <Typography variant="h3" gutterBottom className={classes.title}>
