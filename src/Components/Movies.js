@@ -1,6 +1,9 @@
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import Movie from "./Movie";
+import firebaseDb from "../firebase";
+
+import firebase from "../firebase";
 
 const useStyles = makeStyles({
   root: {
@@ -17,30 +20,12 @@ const useStyles = makeStyles({
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
-    setMovies([
-      {
-        id: 1,
-        name: "Interstellar 1",
-        year: 2012,
-        about: "kdfvbkjndfvkjfdnkjnfdjkn",
-      },
-      {
-        id: 2,
-        name: "Interstellar 2",
-        year: 2012,
-        about: "kdfvbkjndfvkjfdnkjnfdjkn",
-      },
-      {
-        id: 3,
-        name: "Interstellar 3",
-        year: 2012,
-        about: "kdfvbkjndfvkjfdnkjnfdjkn",
-      },
-    ]);
+    console.log(firebase);
+    setMovies([]);
   }, []);
 
   const classes = useStyles();
-  
+
   return (
     <Container className={classes.root}>
       <Typography variant="h3" gutterBottom className={classes.title}>

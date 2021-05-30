@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import { AddCircleOutline } from "@material-ui/icons";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import firebaseDb from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,9 +27,14 @@ const Form = () => {
 
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, year, about);
+    // console.log(name, year, about);
+    const doc = await firebaseDb
+      .collection("movies")
+      .add({ name, about, year });
+    console.log("Document written with ID: " + doc.id);
+
     setName("");
     setYear("");
     setAbout("");
@@ -64,7 +70,7 @@ const Form = () => {
           onChange={(e) => setAbout(e.target.value)}
           className={classes.field}
           id="about"
-          label="About"
+          label="about"
           variant="outlined"
           value={about}
           fullWidth
