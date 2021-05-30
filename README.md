@@ -1,7 +1,7 @@
 # React Firebase CRUD APP
 
-CRUD operations on Movies
-Firebase Firestore - Backend Database
+CRUD operations on Movies.
+Firebase Firestore - Backend Database.
 UI framework - Material UI
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
